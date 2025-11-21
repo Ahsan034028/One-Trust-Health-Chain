@@ -32,6 +32,7 @@ export default function HealthRecords() {
 
   const menuItems = [
     { label: 'Dashboard', icon: Squares2X2Icon, path: '/doctor' },
+    { label: 'Add Patient', icon: PlusIcon, path: '/doctor/add-patient' },
     { label: 'Upload Reports', icon: DocumentArrowUpIcon, path: '/doctor/upload' },
     { label: 'Health records', icon: DocumentTextIcon, path: '/doctor/records' },
     { label: 'Analytics', icon: ChartBarIcon, path: '/doctor/analytics' },

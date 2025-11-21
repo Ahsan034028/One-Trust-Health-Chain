@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronDownIcon, XMarkIcon, Squares2X2Icon, DocumentArrowUpIcon, DocumentTextIcon, ChartBarIcon, QuestionMarkCircleIcon, UserCircleIcon, Cog6ToothIcon, ArrowRightOnRectangleIcon, BellIcon, ChevronRightIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon, XMarkIcon, Squares2X2Icon, DocumentArrowUpIcon, DocumentTextIcon, ChartBarIcon, QuestionMarkCircleIcon, UserCircleIcon, Cog6ToothIcon, ArrowRightOnRectangleIcon, BellIcon, ChevronRightIcon, MoonIcon, SunIcon, PlusIcon } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
 import { useDarkMode } from '../context/DarkModeContext';
 import NotificationBell from '../PatientPortal/NotificationBell';
@@ -12,6 +12,7 @@ export default function HelpSupport() {
 
   const menuItems = [
     { label: 'Dashboard', icon: Squares2X2Icon, path: '/doctor' },
+    { label: 'Add Patient', icon: PlusIcon, path: '/doctor/add-patient' },
     { label: 'Upload Reports', icon: DocumentArrowUpIcon, path: '/doctor/upload' },
     { label: 'Health records', icon: DocumentTextIcon, path: '/doctor/records' },
     { label: 'Analytics', icon: ChartBarIcon, path: '/doctor/analytics' },

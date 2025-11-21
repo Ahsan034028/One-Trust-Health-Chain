@@ -1,8 +1,10 @@
 import React from 'react';
-import { ChevronDownIcon, Squares2X2Icon, DocumentArrowUpIcon, DocumentTextIcon, ChartBarIcon, QuestionMarkCircleIcon, UserCircleIcon, Cog6ToothIcon, ArrowRightOnRectangleIcon, BellIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
 import { useDarkMode } from '../context/DarkModeContext';
 import NotificationBell from '../PatientPortal/NotificationBell';
+import Sidebar from '../components/Sidebar';
+import { Bar, Doughnut } from 'react-chartjs-2';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import blueLogo from '../assets/Bluelogo.png';
 import {
@@ -39,16 +41,6 @@ export default function DoctorDashboard() {
     { name: 'Ola Akintola', date: '12-09-2023', room: 'UI/201', id: '02566', doctor: 'Dr Alimi James' },
     { name: 'Janet Paul', date: '12-09-2023', room: 'AC/32', id: '07634', doctor: 'Dr Rita Areogun' },
     { name: 'Areogun Joe', date: '12-09-2023', room: 'AG/45', id: '02990', doctor: 'Dr Aaron Lekan' },
-  ];
-
-  const menuItems = [
-    { label: 'Dashboard', icon: Squares2X2Icon, active: true, path: '/doctor' },
-    { label: 'Upload Reports', icon: DocumentArrowUpIcon, active: false, path: '/doctor/upload' },
-    { label: 'Health records', icon: DocumentTextIcon, active: false, path: '/doctor/records' },
-    { label: 'Analytics', icon: ChartBarIcon, active: false, path: '/doctor/analytics' },
-    { label: 'Help & Support', icon: QuestionMarkCircleIcon, active: false, path: '/doctor/help' },
-    { label: 'Profile', icon: UserCircleIcon, active: false, path: '/doctor/profile' },
-    { label: 'Settings', icon: Cog6ToothIcon, active: false, path: '/doctor/settings' },
   ];
 
   const barChartData = {
@@ -149,42 +141,7 @@ export default function DoctorDashboard() {
   return (
     <div className={`min-h-screen flex ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
       {/* SIDEBAR */}
-      <aside className={`w-64 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r p-6 flex flex-col gap-8`}>
-        {/* Logo */}
-        <div className="flex items-center">
-          <img src={blueLogo} alt="One Trust Healthchain" className="w-40 h-auto object-contain" />
-        </div>
-
-        {/* Navigation */}
-        <nav className="flex-1 space-y-2">
-          {menuItems.map((item) => (
-            <button
-              key={item.label}
-              onClick={() => navigate(item.path)}
-              className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg transition text-sm font-medium ${
-                item.active
-                  ? 'bg-blue-600 text-white'
-                  : darkMode
-                  ? 'text-gray-300 hover:bg-gray-700'
-                  : 'text-gray-700 hover:bg-gray-100'
-              }`}
-            >
-              <item.icon className="w-5 h-5" />
-              <span>{item.label}</span>
-            </button>
-          ))}
-        </nav>
-
-        {/* Logout */}
-        <button 
-          onClick={() => navigate('/doctor-login')}
-          className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg transition text-sm font-medium ${
-          darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'
-        }`}>
-          <ArrowRightOnRectangleIcon className="w-5 h-5" />
-          <span>Log Out</span>
-        </button>
-      </aside>
+      <Sidebar />
 
       {/* MAIN CONTENT */}
       <main className={`flex-1 flex flex-col ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>

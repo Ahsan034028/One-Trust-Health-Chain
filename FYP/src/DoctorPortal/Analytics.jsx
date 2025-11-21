@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { ChevronDownIcon, EllipsisVerticalIcon, Squares2X2Icon, DocumentArrowUpIcon, DocumentTextIcon, ChartBarIcon, QuestionMarkCircleIcon, UserCircleIcon, Cog6ToothIcon, ArrowRightOnRectangleIcon, BellIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon, EllipsisVerticalIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
 import { useDarkMode } from '../context/DarkModeContext';
 import NotificationBell from '../PatientPortal/NotificationBell';
-import blueLogo from '../assets/Bluelogo.png';
+import Sidebar from '../components/Sidebar';
 import { Line, Doughnut } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -145,17 +145,7 @@ export default function Analytics() {
     }
   };
 
-  const menuItems = [
-    { label: 'Dashboard', icon: Squares2X2Icon, path: '/doctor' },
-    { label: 'Upload Reports', icon: DocumentArrowUpIcon, path: '/doctor/upload' },
-    { label: 'Health records', icon: DocumentTextIcon, path: '/doctor/records' },
-    { label: 'Analytics', icon: ChartBarIcon, path: '/doctor/analytics' },
-    { label: 'Help & Support', icon: QuestionMarkCircleIcon, path: '/doctor/help' },
-    { label: 'Profile', icon: UserCircleIcon, path: '/doctor/profile' },
-    { label: 'Settings', icon: Cog6ToothIcon, path: '/doctor/settings' },
-  ];
-
-  const getStatusColor = (status) => {
+  return (
     switch (status) {
       case 'Confirmed':
         return 'text-green-600';
@@ -171,42 +161,7 @@ export default function Analytics() {
   return (
     <div className={`min-h-screen flex ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
       {/* SIDEBAR */}
-      <aside className={`w-64 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r p-6 flex flex-col gap-8`}>
-        {/* Logo */}
-        <div className="flex items-center">
-          <img src={blueLogo} alt="One Trust Healthchain" className="w-40 h-auto object-contain" />
-        </div>
-
-        {/* Navigation */}
-        <nav className="flex-1 space-y-2">
-          {menuItems.map((item) => (
-            <button
-              key={item.label}
-              onClick={() => navigate(item.path)}
-              className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg transition text-sm font-medium ${
-                item.label === 'Analytics'
-                  ? 'bg-blue-600 text-white'
-                  : darkMode
-                  ? 'text-gray-300 hover:bg-gray-700'
-                  : 'text-gray-700 hover:bg-gray-100'
-              }`}
-            >
-              <item.icon className="w-5 h-5" />
-              <span>{item.label}</span>
-            </button>
-          ))}
-        </nav>
-
-        {/* Logout */}
-        <button 
-          onClick={() => navigate('/doctor-login')}
-          className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg transition text-sm font-medium ${
-          darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'
-        }`}>
-          <ArrowRightOnRectangleIcon className="w-5 h-5" />
-          <span>Log Out</span>
-        </button>
-      </aside>
+      <Sidebar />
 
       {/* MAIN CONTENT */}
       <main className={`flex-1 flex flex-col ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
