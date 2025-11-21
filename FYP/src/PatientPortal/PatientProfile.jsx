@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronDownIcon, BellIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 import PatientSidebar from './PatientSidebar';
+import NotificationBell from './NotificationBell';
 import { useDarkMode } from '../context/DarkModeContext';
 
 export default function PatientProfile() {
@@ -43,11 +44,7 @@ export default function PatientProfile() {
         <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-8 py-4 flex items-center justify-between`}>
           <h1 className={`text-2xl font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Profile</h1>
           <div className="flex items-center gap-4">
-            <button className={`relative w-10 h-10 rounded-full flex items-center justify-center ${
-              darkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-600'
-            }`}>
-              <BellIcon className="w-5 h-5" />
-            </button>
+            <NotificationBell />
             <button 
               onClick={() => toggleDarkMode()}
               className={`relative w-10 h-10 rounded-full flex items-center justify-center transition ${

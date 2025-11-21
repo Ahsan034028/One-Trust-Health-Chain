@@ -31,6 +31,7 @@ const ViewReports = lazy(() => import('./PatientPortal/ViewReports.jsx'));
 const DownloadReports = lazy(() => import('./PatientPortal/DownloadReports.jsx'));
 const PatientProfile = lazy(() => import('./PatientPortal/PatientProfile.jsx'));
 const PatientSettings = lazy(() => import('./PatientPortal/PatientSettings.jsx'));
+const AllNotifications = lazy(() => import('./PatientPortal/AllNotifications.jsx'));
 
 function LoadingSpinner() {
   return (
@@ -76,6 +77,7 @@ export default function App() {
           <Route path="/patient/download" element={<DownloadReports />} />
           <Route path="/patient/profile" element={<PatientProfile />} />
           <Route path="/patient/settings" element={<PatientSettings />} />
+          <Route path="/patient/notifications" element={<AllNotifications />} />
         </Routes>
       </Suspense>
     </Router>

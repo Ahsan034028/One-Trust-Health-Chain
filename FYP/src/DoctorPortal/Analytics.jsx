@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ChevronDownIcon, EllipsisVerticalIcon, Squares2X2Icon, DocumentArrowUpIcon, DocumentTextIcon, ChartBarIcon, QuestionMarkCircleIcon, UserCircleIcon, Cog6ToothIcon, ArrowRightOnRectangleIcon, BellIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
 import { useDarkMode } from '../context/DarkModeContext';
+import NotificationBell from '../PatientPortal/NotificationBell';
 import blueLogo from '../assets/Bluelogo.png';
 import { Line, Doughnut } from 'react-chartjs-2';
 import {
@@ -213,11 +214,7 @@ export default function Analytics() {
         <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-8 py-4 flex items-center justify-between`}>
           <h1 className={`text-2xl font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Analytics</h1>
           <div className="flex items-center gap-4">
-            <button className={`relative w-10 h-10 rounded-full flex items-center justify-center ${
-              darkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-600'
-            }`}>
-              <BellIcon className="w-5 h-5" />
-            </button>
+            <NotificationBell />
             <button 
               onClick={() => toggleDarkMode()}
               className={`relative w-10 h-10 rounded-full flex items-center justify-center transition ${

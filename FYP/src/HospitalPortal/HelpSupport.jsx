@@ -3,6 +3,7 @@ import { ChevronDownIcon, XMarkIcon, Squares2X2Icon, PlusIcon, BuildingLibraryIc
 import { useNavigate } from 'react-router-dom';
 import { useDarkMode } from '../context/DarkModeContext';
 import HospitalSidebar from './HospitalSidebar';
+import NotificationBell from '../PatientPortal/NotificationBell';
 
 export default function HelpSupport() {
   const navigate = useNavigate();
@@ -65,11 +66,7 @@ export default function HelpSupport() {
         <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-8 py-4 flex items-center justify-between`}>
           <h1 className={`text-2xl font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Help & Support</h1>
           <div className="flex items-center gap-4">
-            <button className={`relative w-10 h-10 rounded-full flex items-center justify-center ${
-              darkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-600'
-            }`}>
-              <BellIcon className="w-5 h-5" />
-            </button>
+            <NotificationBell />
             <button 
               onClick={() => toggleDarkMode()}
               className={`relative w-10 h-10 rounded-full flex items-center justify-center transition ${

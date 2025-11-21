@@ -1,7 +1,7 @@
 // src/components/Header.jsx
 import React from 'react';
-import { BellIcon } from '@heroicons/react/24/outline';
 import { useLocation } from 'react-router-dom';
+import NotificationDropdown from './NotificationDropdown';
 
 const pageTitles = {
   '/': 'Dashboard',
@@ -20,10 +20,7 @@ export default function Header() {
     <header className="ml-64 bg-white border-b border-gray-200 px-8 py-5 flex items-center justify-between">
       <h2 className="text-2xl font-semibold text-gray-900">{title}</h2>
       <div className="flex items-center gap-4">
-        <button className="relative">
-          <BellIcon className="w-6 h-6 text-gray-600" />
-          <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-red-500"></span>
-        </button>
+        <NotificationDropdown />
         <div className="flex items-center gap-3">
           <img 
             src="https://randomuser.me/api/portraits/women/44.jpg" 
