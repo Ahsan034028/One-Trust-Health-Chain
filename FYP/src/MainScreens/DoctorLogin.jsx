@@ -51,32 +51,32 @@ export default function DoctorLogin() {
         backgroundPosition: 'center'
       }}>
         {/* Header Navigation */}
-        <div className="px-16 py-6 flex justify-between items-center">
+        <div className="px-8 py-4 flex justify-between items-center">
           <div></div>
-          <div className="flex gap-12">
+          <div className="flex gap-8">
             <button 
               onClick={() => navigate('/welcome')}
-              className="text-white font-bold text-lg hover:text-green-200 transition"
+              className="text-white font-bold text-sm hover:text-green-200 transition"
             >
               WELCOME
             </button>
             <button 
               onClick={() => navigate('/patient-login')}
-              className="text-white font-bold text-lg hover:text-green-200 transition"
+              className="text-white font-bold text-sm hover:text-green-200 transition"
             >
-              PATIENT PORTAL
+              PATIENT
             </button>
             <button 
               onClick={() => navigate('/doctor-login')}
-              className="text-white font-bold text-lg hover:text-green-200 transition"
+              className="text-white font-bold text-sm hover:text-green-200 transition"
             >
-              DOCTOR PORTAL
+              DOCTOR
             </button>
             <button 
               onClick={() => navigate('/hospital-login')}
-              className="text-white font-bold text-lg hover:text-green-200 transition"
+              className="text-white font-bold text-sm hover:text-green-200 transition"
             >
-              HOSPITAL PORTAL
+              HOSPITAL
             </button>
           </div>
           <div></div>
@@ -128,32 +128,32 @@ export default function DoctorLogin() {
       backgroundPosition: 'center'
     }}>
       {/* Header Navigation */}
-      <div className="px-16 py-6 flex justify-between items-center">
+      <div className="px-8 py-4 flex justify-between items-center">
         <div></div>
-        <div className="flex gap-12">
+        <div className="flex gap-8">
           <button 
             onClick={() => navigate('/welcome')}
-            className="text-white font-bold text-lg hover:text-green-200 transition"
+            className="text-white font-bold text-sm hover:text-green-200 transition"
           >
             WELCOME
           </button>
           <button 
             onClick={() => navigate('/patient-login')}
-            className="text-white font-bold text-lg hover:text-green-200 transition"
+            className="text-white font-bold text-sm hover:text-green-200 transition"
           >
-            PATIENT PORTAL
+            PATIENT
           </button>
           <button 
             onClick={() => navigate('/doctor-login')}
-            className="text-white font-bold text-lg hover:text-green-200 transition"
+            className="text-white font-bold text-sm hover:text-green-200 transition"
           >
-            DOCTOR PORTAL
+            DOCTOR
           </button>
           <button 
             onClick={() => navigate('/hospital-login')}
-            className="text-white font-bold text-lg hover:text-green-200 transition"
+            className="text-white font-bold text-sm hover:text-green-200 transition"
           >
-            HOSPITAL PORTAL
+            HOSPITAL
           </button>
         </div>
         <div></div>
@@ -161,49 +161,49 @@ export default function DoctorLogin() {
 
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center">
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-sm">
           {/* Logo */}
-          <div className="text-center mb-12">
-            <img src={logo} alt="One Trust Healthchain Logo" className="h-24 w-auto object-contain mx-auto" />
+          <div className="text-center mb-8">
+            <img src={logo} alt="One Trust Healthchain Logo" className="h-20 w-auto object-contain mx-auto" />
           </div>
 
           {/* Error Message */}
           {error && (
-            <div className="mb-4 p-3 rounded text-sm bg-red-100 text-red-700">
+            <div className="mb-3 p-2 rounded text-xs bg-red-100 text-red-700">
               {error}
             </div>
           )}
 
           {/* Form Container */}
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={handleLogin} className="space-y-3">
             {/* Username Input */}
             <div className="relative">
-              <UserIcon className="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-white" />
+              <UserIcon className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-white" />
               <input
                 type="text"
                 placeholder="DOCTOR USERNAME"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full bg-transparent border-2 border-white text-white placeholder-white placeholder-opacity-70 px-12 py-3 rounded focus:outline-none focus:border-white transition"
+                className="w-full bg-transparent border-2 border-white text-white placeholder-white placeholder-opacity-70 px-10 py-2 text-sm rounded focus:outline-none focus:border-white transition"
               />
             </div>
 
             {/* Password Input */}
             <div className="relative">
-              <LockClosedIcon className="w-5 h-5 absolute left-4 top-1/2 transform -translate-y-1/2 text-white" />
+              <LockClosedIcon className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-white" />
               <input
                 type="password"
                 placeholder="PASSWORD"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-transparent border-2 border-white text-white placeholder-white placeholder-opacity-70 px-12 py-3 rounded focus:outline-none focus:border-white transition"
+                className="w-full bg-transparent border-2 border-white text-white placeholder-white placeholder-opacity-70 px-10 py-2 text-sm rounded focus:outline-none focus:border-white transition"
               />
             </div>
 
             {/* Login Button */}
             <button
               type="submit"
-              className="w-full font-bold py-3 rounded hover:opacity-90 transition mt-6 bg-white text-blue-600"
+              className="w-full font-bold py-2 text-sm rounded hover:opacity-90 transition mt-4 bg-white text-blue-600"
             >
               LOGIN WITH USERNAME
             </button>
@@ -212,17 +212,17 @@ export default function DoctorLogin() {
             <button
               type="button"
               onClick={handleFingerprintLogin}
-              className="w-full font-bold py-3 rounded hover:opacity-90 transition mt-3 bg-transparent text-white border-2 border-white"
+              className="w-full font-bold py-2 text-sm rounded hover:opacity-90 transition mt-2 bg-transparent text-white border-2 border-white"
             >
               LOGIN WITH FINGERPRINT
             </button>
           </form>
 
           {/* Forgot Password */}
-          <div className="text-center mt-4">
+          <div className="text-center mt-3">
             <button
               onClick={() => alert('Password recovery coming soon')}
-              className="font-semibold text-white hover:opacity-75 transition"
+              className="font-semibold text-sm text-white hover:opacity-75 transition"
             >
               Forgot password?
             </button>

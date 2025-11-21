@@ -13,32 +13,32 @@ export default function Welcome() {
       backgroundPosition: 'center'
     }}>
       {/* Header Navigation */}
-      <div className="px-16 py-6 flex justify-between items-center">
+      <div className="px-8 py-4 flex justify-between items-center">
         <div></div>
-        <div className="flex gap-12">
+        <div className="flex gap-8">
           <button 
             onClick={() => navigate('/welcome')}
-            className="text-white font-bold text-lg hover:text-blue-200 transition"
+            className="text-white font-bold text-sm hover:text-blue-200 transition"
           >
             WELCOME
           </button>
           <button 
             onClick={() => navigate('/patient-login')}
-            className="text-white font-bold text-lg hover:text-blue-200 transition"
+            className="text-white font-bold text-sm hover:text-blue-200 transition"
           >
-            PATIENT LOGIN
+            PATIENT
           </button>
           <button 
             onClick={() => navigate('/doctor-login')}
-            className="text-white font-bold text-lg hover:text-blue-200 transition"
+            className="text-white font-bold text-sm hover:text-blue-200 transition"
           >
-            DOCTOR PORTAL
+            DOCTOR
           </button>
           <button 
             onClick={() => navigate('/hospital-login')}
-            className="text-white font-bold text-lg hover:text-blue-200 transition"
+            className="text-white font-bold text-sm hover:text-blue-200 transition"
           >
-            HOSPITAL PORTAL
+            HOSPITAL
           </button>
         </div>
         <div></div>
