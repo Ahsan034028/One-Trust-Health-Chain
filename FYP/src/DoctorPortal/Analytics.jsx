@@ -237,8 +237,8 @@ export default function Analytics() {
         </div>
 
         {/* CONTENT */}
-        <div className="flex-1 overflow-y-auto p-8">
-          <div className="space-y-8">
+        <div className="flex-1 overflow-y-auto p-8 w-full">
+          <div className="space-y-8 w-full">
             {/* Statistics to Date */}
             <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border rounded-xl shadow-sm p-6`}>
               <div className="flex items-center justify-between mb-6">
@@ -252,51 +252,44 @@ export default function Analytics() {
               </div>
 
               {/* Line Chart */}
-              <div className="h-96 mb-6">
+              <div className="h-full min-h-96 mb-6" style={{ height: '500px' }}>
                 <Line data={lineChartData} options={chartOptions} />
               </div>
 
               {/* Legend and Patient Demographics */}
-              <div className="grid grid-cols-2 gap-8 pt-6 border-t" style={{ borderColor: darkMode ? '#4b5563' : '#e5e7eb' }}>
+              <div className="grid grid-cols-4 gap-8 pt-6 border-t" style={{ borderColor: darkMode ? '#4b5563' : '#e5e7eb' }}>
                 <div>
-                  <div className="flex gap-6">
-                    <div>
-                      <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>PERSONNEL</div>
-                      <div className={`text-lg font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>P300 Million</div>
-                    </div>
-                    <div>
-                      <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>SUPPLIES</div>
-                      <div className={`text-lg font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>P31 Million</div>
-                    </div>
-                    <div>
-                      <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>UTILITIES</div>
-                      <div className={`text-lg font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>P18 Million</div>
-                    </div>
-                  </div>
+                  <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>PERSONNEL</div>
+                  <div className={`text-lg font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>P300 Million</div>
+                </div>
+                <div>
+                  <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>SUPPLIES</div>
+                  <div className={`text-lg font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>P31 Million</div>
+                </div>
+                <div>
+                  <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>UTILITIES</div>
+                  <div className={`text-lg font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>P18 Million</div>
                 </div>
 
                 {/* Patient Demographics Doughnut */}
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className={`text-lg font-bold mb-4 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Patient Demographics</h3>
-                    <div className="flex gap-6 text-sm">
-                      <div className="flex items-center gap-2">
-                        <span className="w-3 h-3 bg-blue-600 rounded-full"></span>
-                        <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>AGE</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="w-3 h-3 bg-blue-500 rounded-full"></span>
-                        <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>LOCATION</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="w-3 h-3 bg-blue-400 rounded-full"></span>
-                        <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>GENDER</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="w-32 h-32">
+                <div className="flex flex-col items-center justify-start">
+                  <h3 className={`text-sm font-bold mb-3 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Demographics</h3>
+                  <div className="w-28 h-28 mb-3">
                     <Doughnut data={doughnutChartData} options={doughnutOptions} />
+                  </div>
+                  <div className="flex flex-col gap-2 text-xs">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+                      <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>AGE</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                      <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>LOCATION</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
+                      <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>GENDER</span>
+                    </div>
                   </div>
                 </div>
               </div>
