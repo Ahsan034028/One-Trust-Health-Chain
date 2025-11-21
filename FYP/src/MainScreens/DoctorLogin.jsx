@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserIcon, LockClosedIcon } from '@heroicons/react/24/outline';
 import logo from '../assets/logo.png';
 import background from '../assets/Background.jpg';
+import ForgotPasswordModal from '../components/ForgotPasswordModal';
 
 export default function DoctorLogin() {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ export default function DoctorLogin() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showFingerprintScreen, setShowFingerprintScreen] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   useEffect(() => {
     setShowFingerprintScreen(false);
@@ -221,7 +223,7 @@ export default function DoctorLogin() {
           {/* Forgot Password */}
           <div className="text-center mt-3">
             <button
-              onClick={() => alert('Password recovery coming soon')}
+              onClick={() => setShowForgotPassword(true)}
               className="font-semibold text-sm text-white hover:opacity-75 transition"
             >
               Forgot password?
@@ -229,6 +231,13 @@ export default function DoctorLogin() {
           </div>
         </div>
       </div>
+
+      {/* Forgot Password Modal */}
+      <ForgotPasswordModal 
+        isOpen={showForgotPassword}
+        onClose={() => setShowForgotPassword(false)}
+        portalType="Doctor"
+      />
     </div>
   );
 }
