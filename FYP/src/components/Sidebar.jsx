@@ -7,13 +7,15 @@ import {
   QuestionMarkCircleIcon, 
   UserCircleIcon, 
   Cog6ToothIcon, 
-  ArrowRightOnRectangleIcon
+  ArrowRightOnRectangleIcon,
+  PlusIcon
 } from '@heroicons/react/24/outline';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDarkMode } from '../context/DarkModeContext';
 
 const menuItems = [
   { id: 'dashboard', label: 'Dashboard', icon: Bars3Icon, path: '/doctor' },
+  { id: 'add', label: 'Add Patient', icon: PlusIcon, path: '/doctor/add-patient' },
   { id: 'upload', label: 'Upload Reports', icon: DocumentTextIcon, path: '/doctor/upload' },
   { id: 'records', label: 'Health records', icon: DocumentTextIcon, path: '/doctor/records' },
   { id: 'analytics', label: 'Analytics', icon: ChartBarIcon, path: '/doctor/analytics' },
