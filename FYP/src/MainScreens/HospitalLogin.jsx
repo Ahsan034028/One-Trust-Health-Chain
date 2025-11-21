@@ -4,7 +4,6 @@ import { UserIcon, LockClosedIcon } from '@heroicons/react/24/outline';
 import logo from '../assets/logo.png';
 import background from '../assets/Background.jpg';
 import ForgotPasswordModal from '../components/ForgotPasswordModal';
-import HospitalSignupModal from '../components/HospitalSignupModal';
 
 export default function HospitalLogin() {
   const navigate = useNavigate();
@@ -13,7 +12,11 @@ export default function HospitalLogin() {
   const [error, setError] = useState('');
   const [showFingerprintScreen, setShowFingerprintScreen] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
-  const [showSignup, setShowSignup] = useState(false);
+
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+  
 
   useEffect(() => {
     setShowFingerprintScreen(false);
@@ -43,9 +46,7 @@ export default function HospitalLogin() {
     }
   };
 
-  const handleFingerprintLogin = () => {
-    setShowFingerprintScreen(true);
-  };
+  // Removed fingerprint login action; repurposed button to open signup
 
   if (showFingerprintScreen) {
     return (
@@ -136,26 +137,26 @@ export default function HospitalLogin() {
         <div></div>
         <div className="flex gap-8">
           <button 
-            onClick={() => navigate('/welcome')}
-            className="text-white font-bold text-sm hover:text-red-200 transition"
+            onClick={() => handleNavigation('/welcome')}
+            className="text-white font-bold text-sm hover:text-red-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
           >
             WELCOME
           </button>
           <button 
-            onClick={() => navigate('/patient-login')}
-            className="text-white font-bold text-sm hover:text-red-200 transition"
+            onClick={() => handleNavigation('/patient-login')}
+            className="text-white font-bold text-sm hover:text-red-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
           >
             PATIENT
           </button>
           <button 
-            onClick={() => navigate('/doctor-login')}
-            className="text-white font-bold text-sm hover:text-red-200 transition"
+            onClick={() => handleNavigation('/doctor-login')}
+            className="text-white font-bold text-sm hover:text-red-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
           >
             DOCTOR
           </button>
           <button 
-            onClick={() => navigate('/hospital-login')}
-            className="text-white font-bold text-sm hover:text-red-200 transition"
+            onClick={() => handleNavigation('/hospital-login')}
+            className="text-white font-bold text-sm hover:text-red-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
           >
             HOSPITAL
           </button>
@@ -212,13 +213,13 @@ export default function HospitalLogin() {
               LOGIN WITH USERNAME
             </button>
 
-            {/* Fingerprint Login Button */}
+            {/* Signup Button (navigates to full-screen signup) */}
             <button
               type="button"
-              onClick={handleFingerprintLogin}
+              onClick={() => navigate('/hospital-signup')}
               className="w-full font-bold py-2 text-sm rounded hover:opacity-90 transition mt-2 bg-transparent text-white border-2 border-white"
             >
-              LOGIN WITH FINGERPRINT
+              SIGNUP AS A HOSPITAL
             </button>
           </form>
 
@@ -229,12 +230,6 @@ export default function HospitalLogin() {
               className="block w-full font-semibold text-sm text-white hover:opacity-75 transition"
             >
               Forgot password?
-            </button>
-            <button
-              onClick={() => setShowSignup(true)}
-              className="block w-full font-semibold text-sm text-white hover:opacity-75 transition"
-            >
-              Signup as Hospital
             </button>
           </div>
         </div>
@@ -247,11 +242,7 @@ export default function HospitalLogin() {
         portalType="Hospital"
       />
 
-      {/* Hospital Signup Modal */}
-      <HospitalSignupModal
-        isOpen={showSignup}
-        onClose={() => setShowSignup(false)}
-      />
+      {/* No inline signup modal; using dedicated route */}
     </div>
   );
 }

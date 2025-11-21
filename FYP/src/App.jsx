@@ -6,6 +6,7 @@ const Welcome = lazy(() => import('./MainScreens/Welcome.jsx'));
 const PatientLogin = lazy(() => import('./MainScreens/PatientLogin.jsx'));
 const DoctorLogin = lazy(() => import('./MainScreens/DoctorLogin.jsx'));
 const HospitalLogin = lazy(() => import('./MainScreens/HospitalLogin.jsx'));
+const HospitalSignup = lazy(() => import('./MainScreens/HospitalSignup.jsx'));
 
 // Doctor Portal
 const DoctorDashboard = lazy(() => import('./DoctorPortal/DoctorDashboard.jsx'));
@@ -52,6 +53,7 @@ export default function App() {
           <Route path="/patient-login" element={<PatientLogin />} />
           <Route path="/doctor-login" element={<DoctorLogin />} />
           <Route path="/hospital-login" element={<HospitalLogin />} />
+          <Route path="/hospital-signup" element={<HospitalSignup />} />
 
           {/* Doctor Portal Routes */}
           <Route path="/doctor" element={<DoctorDashboard />} />

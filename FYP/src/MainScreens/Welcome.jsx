@@ -6,6 +6,10 @@ import background from '../assets/Background.jpg';
 export default function Welcome() {
   const navigate = useNavigate();
 
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+
   return (
     <div className="min-h-screen flex flex-col" style={{
       backgroundImage: `url(${background})`,
@@ -17,26 +21,26 @@ export default function Welcome() {
         <div></div>
         <div className="flex gap-8">
           <button 
-            onClick={() => navigate('/welcome')}
-            className="text-white font-bold text-sm hover:text-blue-200 transition"
+            onClick={() => handleNavigation('/welcome')}
+            className="text-white font-bold text-sm hover:text-blue-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
           >
             WELCOME
           </button>
           <button 
-            onClick={() => navigate('/patient-login')}
-            className="text-white font-bold text-sm hover:text-blue-200 transition"
+            onClick={() => handleNavigation('/patient-login')}
+            className="text-white font-bold text-sm hover:text-blue-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
           >
             PATIENT
           </button>
           <button 
-            onClick={() => navigate('/doctor-login')}
-            className="text-white font-bold text-sm hover:text-blue-200 transition"
+            onClick={() => handleNavigation('/doctor-login')}
+            className="text-white font-bold text-sm hover:text-blue-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
           >
             DOCTOR
           </button>
           <button 
-            onClick={() => navigate('/hospital-login')}
-            className="text-white font-bold text-sm hover:text-blue-200 transition"
+            onClick={() => handleNavigation('/hospital-login')}
+            className="text-white font-bold text-sm hover:text-blue-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
           >
             HOSPITAL
           </button>

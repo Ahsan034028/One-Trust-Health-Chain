@@ -12,6 +12,10 @@ export default function DoctorLogin() {
   const [error, setError] = useState('');
   const [showForgotPassword, setShowForgotPassword] = useState(false);
 
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+
   const validateForm = () => {
     if (!username.trim() || !password.trim()) {
       setError('Username and password are required');
@@ -51,26 +55,26 @@ export default function DoctorLogin() {
         <div></div>
         <div className="flex gap-8">
           <button 
-            onClick={() => navigate('/welcome')}
-            className="text-white font-bold text-sm hover:text-green-200 transition"
+            onClick={() => handleNavigation('/welcome')}
+            className="text-white font-bold text-sm hover:text-green-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
           >
             WELCOME
           </button>
           <button 
-            onClick={() => navigate('/patient-login')}
-            className="text-white font-bold text-sm hover:text-green-200 transition"
+            onClick={() => handleNavigation('/patient-login')}
+            className="text-white font-bold text-sm hover:text-green-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
           >
             PATIENT
           </button>
           <button 
-            onClick={() => navigate('/doctor-login')}
-            className="text-white font-bold text-sm hover:text-green-200 transition"
+            onClick={() => handleNavigation('/doctor-login')}
+            className="text-white font-bold text-sm hover:text-green-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
           >
             DOCTOR
           </button>
           <button 
-            onClick={() => navigate('/hospital-login')}
-            className="text-white font-bold text-sm hover:text-green-200 transition"
+            onClick={() => handleNavigation('/hospital-login')}
+            className="text-white font-bold text-sm hover:text-green-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
           >
             HOSPITAL
           </button>
@@ -122,7 +126,7 @@ export default function DoctorLogin() {
             {/* Login Button */}
             <button
               type="submit"
-              className="w-full font-bold py-2 text-sm rounded hover:opacity-90 transition mt-4 bg-white text-green-600"
+              className="w-full font-bold py-2 text-sm rounded hover:opacity-90 transition mt-4 bg-white text-blue-600"
             >
               LOGIN WITH USERNAME
             </button>
