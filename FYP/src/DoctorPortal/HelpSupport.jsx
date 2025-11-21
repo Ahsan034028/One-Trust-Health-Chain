@@ -1,25 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronDownIcon, XMarkIcon, Squares2X2Icon, DocumentArrowUpIcon, DocumentTextIcon, ChartBarIcon, QuestionMarkCircleIcon, UserCircleIcon, Cog6ToothIcon, ArrowRightOnRectangleIcon, BellIcon, ChevronRightIcon, MoonIcon, SunIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon, XMarkIcon, ChevronRightIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
 import { useDarkMode } from '../context/DarkModeContext';
 import NotificationBell from '../PatientPortal/NotificationBell';
-import blueLogo from '../assets/Bluelogo.png';
+import Sidebar from '../components/Sidebar';
 
 export default function HelpSupport() {
   const navigate = useNavigate();
   const { darkMode, toggleDarkMode } = useDarkMode();
   const [expandedFaq, setExpandedFaq] = useState(null);
-
-  const menuItems = [
-    { label: 'Dashboard', icon: Squares2X2Icon, path: '/doctor' },
-    { label: 'Add Patient', icon: PlusIcon, path: '/doctor/add-patient' },
-    { label: 'Upload Reports', icon: DocumentArrowUpIcon, path: '/doctor/upload' },
-    { label: 'Health records', icon: DocumentTextIcon, path: '/doctor/records' },
-    { label: 'Analytics', icon: ChartBarIcon, path: '/doctor/analytics' },
-    { label: 'Help & Support', icon: QuestionMarkCircleIcon, path: '/doctor/help' },
-    { label: 'Profile', icon: UserCircleIcon, path: '/doctor/profile' },
-    { label: 'Settings', icon: Cog6ToothIcon, path: '/doctor/settings' },
-  ];
 
   const faqs = [
     {
@@ -68,46 +57,10 @@ export default function HelpSupport() {
 
   return (
     <div className={`flex h-screen ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
-      {/* SIDEBAR */}
-      <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} w-64 border-r ${darkMode ? 'border-gray-700' : 'border-gray-200'} p-6 flex flex-col h-screen`}>
-        {/* LOGO */}
-        <div className="mb-8 flex items-center justify-start">
-          <img src={blueLogo} alt="Logo" className="w-40" />
-        </div>
-
-        {/* Navigation */}
-        <nav className="flex-1 space-y-2 overflow-y-auto">
-          {menuItems.map((item) => (
-            <button
-              key={item.label}
-              onClick={() => navigate(item.path)}
-              className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg transition text-sm font-medium ${
-                item.label === 'Help & Support'
-                  ? 'bg-blue-600 text-white'
-                  : darkMode
-                  ? 'text-gray-300 hover:bg-gray-700'
-                  : 'text-gray-700 hover:bg-gray-100'
-              }`}
-            >
-              <item.icon className="w-5 h-5" />
-              <span>{item.label}</span>
-            </button>
-          ))}
-        </nav>
-
-        {/* Logout */}
-        <button 
-          onClick={() => navigate('/doctor-login')}
-          className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg transition text-sm font-medium mt-auto ${
-          darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'
-        }`}>
-          <ArrowRightOnRectangleIcon className="w-5 h-5" />
-          <span>Logout</span>
-        </button>
-      </div>
+      <Sidebar />
 
       {/* MAIN CONTENT */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col ml-64">
         {/* TOP BAR */}
         <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-8 py-4 flex items-center justify-between`}>
           <h1 className={`text-2xl font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Help & Support</h1>
