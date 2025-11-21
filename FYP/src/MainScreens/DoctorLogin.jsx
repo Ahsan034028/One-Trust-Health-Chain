@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserIcon, LockClosedIcon } from '@heroicons/react/24/outline';
 import logo from '../assets/logo.png';
@@ -10,12 +10,7 @@ export default function DoctorLogin() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [showFingerprintScreen, setShowFingerprintScreen] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
-
-  useEffect(() => {
-    setShowFingerprintScreen(false);
-  }, []);
 
   const validateForm = () => {
     if (!username.trim() || !password.trim()) {
@@ -44,84 +39,6 @@ export default function DoctorLogin() {
   const handleFingerprintLogin = () => {
     setShowFingerprintScreen(true);
   };
-
-  if (showFingerprintScreen) {
-    return (
-      <div className="min-h-screen flex flex-col" style={{
-        backgroundImage: `url(${background})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}>
-        {/* Header Navigation */}
-        <div className="px-8 py-4 flex justify-between items-center">
-          <div></div>
-          <div className="flex gap-8">
-            <button 
-              onClick={() => navigate('/welcome')}
-              className="text-white font-bold text-sm hover:text-green-200 transition"
-            >
-              WELCOME
-            </button>
-            <button 
-              onClick={() => navigate('/patient-login')}
-              className="text-white font-bold text-sm hover:text-green-200 transition"
-            >
-              PATIENT
-            </button>
-            <button 
-              onClick={() => navigate('/doctor-login')}
-              className="text-white font-bold text-sm hover:text-green-200 transition"
-            >
-              DOCTOR
-            </button>
-            <button 
-              onClick={() => navigate('/hospital-login')}
-              className="text-white font-bold text-sm hover:text-green-200 transition"
-            >
-              HOSPITAL
-            </button>
-          </div>
-          <div></div>
-        </div>
-
-        {/* Fingerprint Screen */}
-        <div className="flex-1 flex items-center justify-center flex-col">
-          <div className="text-center">
-            {/* Fingerprint Icon - Exact design from image */}
-            <div className="mb-12">
-              <svg width="150" height="150" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-auto">
-                <circle cx="50" cy="50" r="45" fill="none" stroke="white" strokeWidth="2"/>
-                <circle cx="50" cy="50" r="38" fill="none" stroke="white" strokeWidth="1.5"/>
-                <circle cx="50" cy="50" r="31" fill="none" stroke="white" strokeWidth="1.5"/>
-                <circle cx="50" cy="50" r="24" fill="none" stroke="white" strokeWidth="1.5"/>
-                <circle cx="50" cy="50" r="17" fill="none" stroke="white" strokeWidth="1.5"/>
-                <circle cx="50" cy="50" r="10" fill="none" stroke="white" strokeWidth="1.5"/>
-                <circle cx="50" cy="50" r="3" fill="white"/>
-              </svg>
-            </div>
-
-            {/* LOGIN WITH USERNAME Button */}
-            <button
-              onClick={() => setShowFingerprintScreen(false)}
-              className="bg-white text-blue-600 font-bold py-3 px-16 rounded hover:bg-gray-100 transition"
-            >
-              LOGIN WITH USERNAME
-            </button>
-
-            {/* Forgot password */}
-            <div className="mt-6">
-              <button
-                onClick={() => alert('Password recovery coming soon')}
-                className="text-white font-semibold hover:text-green-200 transition"
-              >
-                Forgot password?
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen flex flex-col" style={{
@@ -205,18 +122,9 @@ export default function DoctorLogin() {
             {/* Login Button */}
             <button
               type="submit"
-              className="w-full font-bold py-2 text-sm rounded hover:opacity-90 transition mt-4 bg-white text-blue-600"
+              className="w-full font-bold py-2 text-sm rounded hover:opacity-90 transition mt-4 bg-white text-green-600"
             >
               LOGIN WITH USERNAME
-            </button>
-
-            {/* Fingerprint Login Button */}
-            <button
-              type="button"
-              onClick={handleFingerprintLogin}
-              className="w-full font-bold py-2 text-sm rounded hover:opacity-90 transition mt-2 bg-transparent text-white border-2 border-white"
-            >
-              LOGIN WITH FINGERPRINT
             </button>
           </form>
 

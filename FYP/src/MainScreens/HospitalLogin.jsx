@@ -4,6 +4,7 @@ import { UserIcon, LockClosedIcon } from '@heroicons/react/24/outline';
 import logo from '../assets/logo.png';
 import background from '../assets/Background.jpg';
 import ForgotPasswordModal from '../components/ForgotPasswordModal';
+import HospitalSignupModal from '../components/HospitalSignupModal';
 
 export default function HospitalLogin() {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ export default function HospitalLogin() {
   const [error, setError] = useState('');
   const [showFingerprintScreen, setShowFingerprintScreen] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
 
   useEffect(() => {
     setShowFingerprintScreen(false);
@@ -220,13 +222,19 @@ export default function HospitalLogin() {
             </button>
           </form>
 
-          {/* Forgot Password */}
-          <div className="text-center mt-3">
+          {/* Forgot Password and Signup */}
+          <div className="text-center mt-3 space-y-2">
             <button
               onClick={() => setShowForgotPassword(true)}
-              className="font-semibold text-sm text-white hover:opacity-75 transition"
+              className="block w-full font-semibold text-sm text-white hover:opacity-75 transition"
             >
               Forgot password?
+            </button>
+            <button
+              onClick={() => setShowSignup(true)}
+              className="block w-full font-semibold text-sm text-white hover:opacity-75 transition"
+            >
+              Signup as Hospital
             </button>
           </div>
         </div>
@@ -237,6 +245,12 @@ export default function HospitalLogin() {
         isOpen={showForgotPassword}
         onClose={() => setShowForgotPassword(false)}
         portalType="Hospital"
+      />
+
+      {/* Hospital Signup Modal */}
+      <HospitalSignupModal
+        isOpen={showSignup}
+        onClose={() => setShowSignup(false)}
       />
     </div>
   );
