@@ -252,7 +252,7 @@ export default function Analytics() {
               </div>
 
               {/* Line Chart */}
-              <div className="h-80 mb-6">
+              <div className="h-96 mb-6">
                 <Line data={lineChartData} options={chartOptions} />
               </div>
 

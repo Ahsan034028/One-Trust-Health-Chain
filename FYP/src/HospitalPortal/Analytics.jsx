@@ -159,11 +159,11 @@ export default function Analytics() {
           </div>
 
           {/* Charts Grid */}
-          <div className="grid grid-cols-2 gap-6 mb-8">
+          <div className="space-y-6 mb-8">
             {/* Statistics Chart */}
             <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border rounded-xl p-6 shadow-sm`}>
               <h3 className={`font-semibold mb-4 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Statistics</h3>
-              <div className="h-64">
+              <div className="h-80">
                 <Bar data={statisticsData} options={chartOptions} />
               </div>
             </div>
