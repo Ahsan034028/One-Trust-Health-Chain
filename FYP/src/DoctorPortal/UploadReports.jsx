@@ -8,13 +8,125 @@ import blueLogo from '../assets/Bluelogo.png';
 export default function UploadReports() {
   const navigate = useNavigate();
   const { darkMode, toggleDarkMode } = useDarkMode();
-  const [files, setFiles] = useState([
-    { id: 1, name: 'MRI Report', size: '100KB' },
-    { id: 2, name: 'Diagnostic Report', size: '100KB' },
-  ]);
+  const fileInputRef = React.useRef(null);
+  
+  const [files, setFiles] = useState([]);
+  
+  const [selectedPatient, setSelectedPatient] = useState('');
+  const [patientWalletAddress, setPatientWalletAddress] = useState('');
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+  
+  // Sample patient data - in real app, this would come from database/API
+  const patients = [
+    { id: 1, name: 'Ahmed Ali', walletAddress: '0x1234567890123456789012345678901234567890' },
+    { id: 2, name: 'Fatima Khan', walletAddress: '0xabcdefabcdefabcdefabcdefabcdefabcdefabcd' },
+    { id: 3, name: 'Muhammad Hassan', walletAddress: '0x9876543210987654321098765432109876543210' },
+  ];
+
+  const handlePatientChange = (e) => {
+    const patientId = e.target.value;
+    setSelectedPatient(patientId);
+    const patient = patients.find(p => p.id === parseInt(patientId));
+    if (patient) {
+      setPatientWalletAddress(patient.walletAddress);
+    }
+  };
+
+  const handleWalletAddressChange = (e) => {
+    setPatientWalletAddress(e.target.value);
+  };
+
+  const handleBrowseFiles = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileSelect = (e) => {
+    const selectedFiles = e.target.files;
+    if (selectedFiles) {
+      for (let i = 0; i < selectedFiles.length; i++) {
+        const file = selectedFiles[i];
+        const newFile = {
+          id: Math.max(...files.map(f => f.id), 0) + 1,
+          name: file.name,
+          size: (file.size / 1024).toFixed(2) + 'KB'
+        };
+        setFiles(prev => [...prev, newFile]);
+      }
+    }
+  };
 
   const removeFile = (id) => {
     setFiles(files.filter(f => f.id !== id));
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const droppedFiles = e.dataTransfer.files;
+    if (droppedFiles) {
+      for (let i = 0; i < droppedFiles.length; i++) {
+        const file = droppedFiles[i];
+        const newFile = {
+          id: Math.max(...files.map(f => f.id), 0) + 1,
+          name: file.name,
+          size: (file.size / 1024).toFixed(2) + 'KB'
+        };
+        setFiles(prev => [...prev, newFile]);
+      }
+    }
+  };
+
+  const handleDoneUpload = () => {
+    // Validation
+    if (!selectedPatient || !patientWalletAddress.trim()) {
+      alert('Please select a patient and provide a wallet address');
+      return;
+    }
+
+    if (files.length === 0) {
+      alert('Please add at least one file to upload');
+      return;
+    }
+
+    // Get patient name
+    const patient = patients.find(p => p.id === parseInt(selectedPatient));
+    const patientName = patient?.name || 'Unknown';
+
+    // Upload simulation - log the data
+    const uploadData = {
+      patientName: patientName,
+      patientId: selectedPatient,
+      walletAddress: patientWalletAddress,
+      files: files,
+      timestamp: new Date().toLocaleString(),
+    };
+
+    console.log('Report Upload:', uploadData);
+    
+    // Set success message and show modal
+    setSuccessMessage(`Successfully uploaded ${files.length} report(s) for ${patientName}`);
+    setShowSuccessModal(true);
+
+    // Reset form after showing success
+    setTimeout(() => {
+      setSelectedPatient('');
+      setPatientWalletAddress('');
+      setFiles([]);
+      setShowSuccessModal(false);
+      navigate('/doctor');
+    }, 2500);
+  };
+
+  const handleCancel = () => {
+    setSelectedPatient('');
+    setPatientWalletAddress('');
+    setFiles([]);
   };
 
   const menuItems = [
@@ -29,6 +141,43 @@ export default function UploadReports() {
 
   return (
     <div className={`min-h-screen flex ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      {/* SUCCESS MODAL */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border rounded-2xl shadow-2xl p-8 max-w-md mx-4 animate-bounce`}>
+            <div className="text-center">
+              {/* Success Icon */}
+              <div className="flex justify-center mb-6">
+                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
+                  <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Success Message */}
+              <h3 className={`text-2xl font-bold mb-4 ${darkMode ? 'text-green-400' : 'text-green-600'}`}>
+                Upload Successful! ✓
+              </h3>
+              <p className={`text-base mb-6 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                {successMessage}
+              </p>
+
+              {/* Loading Indicator */}
+              <div className="flex justify-center gap-2 mb-4">
+                <div className="w-3 h-3 bg-blue-600 rounded-full animate-pulse"></div>
+                <div className="w-3 h-3 bg-blue-600 rounded-full animate-pulse delay-100"></div>
+                <div className="w-3 h-3 bg-blue-600 rounded-full animate-pulse delay-200"></div>
+              </div>
+
+              <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                Redirecting to dashboard...
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* SIDEBAR */}
       <aside className={`w-64 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r p-6 flex flex-col gap-8`}>
         {/* Logo */}
@@ -109,8 +258,63 @@ export default function UploadReports() {
               </div>
               <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'} mb-6`}>Add your documents here, and you can upload up to 5 files max</p>
 
+              {/* Patient Selection Section */}
+              <div className={`mb-8 p-6 rounded-xl border ${darkMode ? 'border-gray-600 bg-gray-700/50' : 'border-gray-200 bg-gray-50'}`}>
+                <h3 className={`text-base font-semibold mb-4 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Select Patient</h3>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  {/* Patient Selection */}
+                  <div>
+                    <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Patient Name *</label>
+                    <select
+                      value={selectedPatient}
+                      onChange={handlePatientChange}
+                      className={`w-full px-4 py-2 rounded-lg border transition-colors ${
+                        darkMode
+                          ? 'bg-gray-800 border-gray-600 text-gray-100 focus:border-blue-500 focus:outline-none'
+                          : 'bg-white border-gray-300 text-gray-900 focus:border-blue-500 focus:outline-none'
+                      }`}
+                    >
+                      <option value="">-- Select Patient --</option>
+                      {patients.map(patient => (
+                        <option key={patient.id} value={patient.id}>{patient.name}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Wallet Address Input - Now Editable */}
+                  <div>
+                    <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Wallet Address</label>
+                    <input
+                      type="text"
+                      value={patientWalletAddress}
+                      onChange={handleWalletAddressChange}
+                      placeholder="Paste or select patient wallet address"
+                      className={`w-full px-4 py-2 rounded-lg border transition-colors ${
+                        darkMode
+                          ? 'bg-gray-800 border-gray-600 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none'
+                          : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:outline-none'
+                      }`}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Hidden File Input */}
+              <input
+                ref={fileInputRef}
+                type="file"
+                multiple
+                accept=".jpg,.png,.svg,.zip"
+                onChange={handleFileSelect}
+                className="hidden"
+              />
+
               {/* Drag & Drop Area */}
-              <div className={`border-2 border-dashed rounded-xl p-12 text-center mb-6 transition-colors ${
+              <div
+                onDragOver={handleDragOver}
+                onDrop={handleDrop}
+                className={`border-2 border-dashed rounded-xl p-12 text-center mb-6 transition-colors cursor-pointer ${
                 darkMode 
                   ? 'border-blue-500 bg-blue-900/20' 
                   : 'border-blue-400 bg-blue-50'
@@ -126,7 +330,10 @@ export default function UploadReports() {
                 </div>
                 <p className={`font-medium mb-1 transition-colors ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>Drag your file(s) to start uploading</p>
                 <p className={`text-sm mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>OR</p>
-                <button className={`px-6 py-2 rounded-lg text-sm font-medium transition-colors ${
+                <button
+                  onClick={handleBrowseFiles}
+                  type="button"
+                  className={`px-6 py-2 rounded-lg text-sm font-medium transition-colors ${
                   darkMode
                     ? 'bg-blue-600 text-white hover:bg-blue-700'
                     : 'bg-blue-600 text-white hover:bg-blue-700'
@@ -169,18 +376,24 @@ export default function UploadReports() {
 
               {/* Action Buttons */}
               <div className="flex gap-3 justify-end">
-                <button className={`px-6 py-2 rounded-lg font-medium transition-colors ${
-                  darkMode
-                    ? 'border border-gray-600 text-gray-300 hover:bg-gray-700'
-                    : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
-                }`}>
+                <button
+                  onClick={handleCancel}
+                  type="button"
+                  className={`px-6 py-2 rounded-lg font-medium transition-colors ${
+                    darkMode
+                      ? 'border border-gray-600 text-gray-300 hover:bg-gray-700'
+                      : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
+                  }`}>
                   Cancel
                 </button>
-                <button className={`px-6 py-2 rounded-lg font-medium transition-colors ${
-                  darkMode
-                    ? 'bg-blue-600 text-white hover:bg-blue-700'
-                    : 'bg-blue-600 text-white hover:bg-blue-700'
-                }`}>
+                <button
+                  onClick={handleDoneUpload}
+                  type="button"
+                  className={`px-6 py-2 rounded-lg font-medium transition-colors ${
+                    darkMode
+                      ? 'bg-blue-600 text-white hover:bg-blue-700'
+                      : 'bg-blue-600 text-white hover:bg-blue-700'
+                  }`}>
                   Done
                 </button>
               </div>
