@@ -7,7 +7,8 @@ import ForgotPasswordModal from '../components/ForgotPasswordModal';
 
 export default function HospitalLogin() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState('');
+  const [walletAddress, setWalletAddress] = useState('');
+  const [privateKey, setPrivateKey] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showFingerprintScreen, setShowFingerprintScreen] = useState(false);
@@ -16,19 +17,22 @@ export default function HospitalLogin() {
   const handleNavigation = (path) => {
     navigate(path);
   };
-  
 
   useEffect(() => {
     setShowFingerprintScreen(false);
   }, []);
 
   const validateForm = () => {
-    if (!username.trim() || !password.trim()) {
-      setError('Username and password are required');
+    if (!walletAddress.trim() || !privateKey.trim() || !password.trim()) {
+      setError('Wallet Address, Private Key, and Password are required');
       return false;
     }
-    if (!/^[a-zA-Z0-9@._-]{3,}$/.test(username)) {
-      setError('Username must be at least 3 characters');
+    if (!/^0x[a-fA-F0-9]{40}$/.test(walletAddress)) {
+      setError('Wallet Address must be a valid Ethereum address (0x...)');
+      return false;
+    }
+    if (privateKey.length < 10) {
+      setError('Private Key must be at least 10 characters');
       return false;
     }
     if (!/^.{6,}$/.test(password)) {
@@ -181,15 +185,27 @@ export default function HospitalLogin() {
 
           {/* Form Container */}
           <form onSubmit={handleLogin} className="space-y-3">
-            {/* Username Input */}
+            {/* Wallet Address Input */}
             <div className="relative">
               <UserIcon className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-white" />
               <input
                 type="text"
-                placeholder="HOSPITAL USERNAME"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                placeholder="WALLET ADDRESS (0x...)"
+                value={walletAddress}
+                onChange={(e) => setWalletAddress(e.target.value)}
                 className="w-full bg-transparent border-2 border-white text-white placeholder-white placeholder-opacity-70 px-10 py-2 text-sm rounded focus:outline-none focus:border-white transition"
+              />
+            </div>
+
+            {/* Private Key Input */}
+            <div className="relative">
+              <LockClosedIcon className="w-4 h-4 absolute left-3 top-3 text-white" />
+              <textarea
+                placeholder="PRIVATE KEY"
+                value={privateKey}
+                onChange={(e) => setPrivateKey(e.target.value)}
+                rows="1"
+                className="w-full bg-transparent border-2 border-white text-white placeholder-white placeholder-opacity-70 px-10 py-2 text-sm rounded focus:outline-none focus:border-white transition resize-none"
               />
             </div>
 
@@ -210,7 +226,7 @@ export default function HospitalLogin() {
               type="submit"
               className="w-full font-bold py-2 text-sm rounded hover:opacity-90 transition mt-4 bg-white text-blue-600"
             >
-              LOGIN WITH USERNAME
+              LOGIN
             </button>
 
             {/* Signup Button (navigates to full-screen signup) */}

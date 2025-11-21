@@ -25,6 +25,9 @@ export default function Profile() {
     consultationHours: 'Add',
     languages: 'Add',
     prescriptions: 'Add',
+    walletAddress: '',
+    privateKey: '',
+    password: '',
   });
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
@@ -48,6 +51,9 @@ export default function Profile() {
     { label: 'Consultation hours / availability', key: 'consultationHours', value: profileData.consultationHours },
     { label: 'Languages spoken', key: 'languages', value: profileData.languages },
     { label: 'Uploaded prescriptions / patient history', key: 'prescriptions', value: profileData.prescriptions },
+    { label: 'Wallet Address', key: 'walletAddress', value: profileData.walletAddress },
+    { label: 'Password', key: 'password', value: profileData.password },
+    { label: 'Private Key', key: 'privateKey', value: profileData.privateKey },
   ];
 
   const rightSideItems = [

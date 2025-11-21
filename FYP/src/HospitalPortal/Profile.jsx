@@ -19,6 +19,9 @@ export default function Profile() {
     departments: 'Cardiology, Orthopedics, Neurology, General Surgery',
     adminName: 'Dr. John Smith',
     adminEmail: 'john@agakhan.pk',
+    walletAddress: '',
+    privateKey: '',
+    password: '',
   });
 
   const handleInputChange = (e) => {
@@ -254,6 +257,63 @@ export default function Profile() {
                       }`}
                     />
                   </div>
+                </div>
+              </div>
+
+              {/* Blockchain Information */}
+              <div className="mt-8 pt-8 border-t" style={{ borderColor: darkMode ? '#374151' : '#e5e7eb' }}>
+                <h3 className={`text-lg font-semibold mb-6 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Blockchain Information</h3>
+                <div className="grid grid-cols-2 gap-8">
+                  {/* Wallet Address */}
+                  <div>
+                    <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Wallet Address</label>
+                    <input
+                      type="text"
+                      name="walletAddress"
+                      value={formData.walletAddress}
+                      onChange={handleInputChange}
+                      placeholder="0x..."
+                      className={`w-full px-4 py-2 rounded-lg border transition-colors ${
+                        darkMode
+                          ? 'bg-gray-700 border-gray-600 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none'
+                          : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:outline-none'
+                      }`}
+                    />
+                  </div>
+
+                  {/* Password */}
+                  <div>
+                    <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Password</label>
+                    <input
+                      type="password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      placeholder="Enter password"
+                      className={`w-full px-4 py-2 rounded-lg border transition-colors ${
+                        darkMode
+                          ? 'bg-gray-700 border-gray-600 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none'
+                          : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:outline-none'
+                      }`}
+                    />
+                  </div>
+                </div>
+
+                {/* Private Key - Full Width */}
+                <div className="mt-6">
+                  <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Private Key</label>
+                  <textarea
+                    name="privateKey"
+                    value={formData.privateKey}
+                    onChange={handleInputChange}
+                    placeholder="Enter private key"
+                    rows="3"
+                    className={`w-full px-4 py-2 rounded-lg border transition-colors ${
+                      darkMode
+                        ? 'bg-gray-700 border-gray-600 text-gray-100 placeholder-gray-400 focus:border-blue-500 focus:outline-none'
+                        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:outline-none'
+                    }`}
+                  />
                 </div>
               </div>
 

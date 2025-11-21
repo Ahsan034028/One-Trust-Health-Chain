@@ -15,7 +15,7 @@ import blueLogo from '../assets/Bluelogo.png';
 
 const menuItems = [
   { id: 'dashboard', label: 'Dashboard', icon: Bars3Icon, path: '/hospital' },
-  { id: 'add', label: 'Add Hospital', icon: PlusIcon, path: '/hospital/add' },
+  { id: 'add', label: 'Add Doctor', icon: PlusIcon, path: '/hospital/add-doctor' },
   { id: 'manage', label: 'Manage Hospitals', icon: BuildingLibraryIcon, path: '/hospital/manage' },
   { id: 'analytics', label: 'Analytics', icon: ChartBarIcon, path: '/hospital/analytics' },
   { id: 'help', label: 'Help & Support', icon: QuestionMarkCircleIcon, path: '/hospital/help' },
