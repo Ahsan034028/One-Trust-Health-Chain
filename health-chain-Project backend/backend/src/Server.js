@@ -3,6 +3,7 @@ const app = express()
 const connectDB = require("./config/Database");
 const authRoutes = require("./routes/auth");
 const accessRoutes = require("./routes/access");
+const recordRoutes = require("./routes/record");
 const port = 3000
 const cookieParser = require("cookie-parser");
 
@@ -15,6 +16,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/access", accessRoutes);
+app.use("/api/record", recordRoutes);
 
 connectDB()
   .then(() => {
