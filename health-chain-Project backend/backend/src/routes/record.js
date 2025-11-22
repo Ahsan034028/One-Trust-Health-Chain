@@ -142,6 +142,7 @@ module.exports = router;
 
 // Helper: resolve patient by MongoDB id or wallet address
 async function resolvePatientByIdOrWallet(patientId) {
+  
 	if (!patientId) return null;
 	if (mongoose.Types.ObjectId.isValid(patientId)) {
 		return await Patient.findById(patientId);
@@ -152,6 +153,48 @@ async function resolvePatientByIdOrWallet(patientId) {
 	return null;
 }
 
+// Convenience alias: allow requests to use query param `patientId` instead of path param
+// GET /api/record/doctor/patient?patientId=<id_or_wallet>&index=n
+router.get("/doctor/patient", requireDoctorAuth, async (req, res) => {
+	try {
+		const { patientId } = req.query;
+		if (!patientId) return res.status(400).json({ msg: "Missing patientId query parameter" });
+		const index = req.query.index !== undefined ? Number(req.query.index) : undefined;
+
+		const patient = await resolvePatientByIdOrWallet(patientId);
+		if (!patient) return res.status(404).json({ msg: "Patient not found" });
+
+		const rpc = process.env.RPC_URL || "http://127.0.0.1:8545";
+		const provider = new ethers.providers.JsonRpcProvider(rpc);
+
+		const consentAddress = process.env.CONSENT_CONTRACT_ADDRESS;
+		if (!consentAddress) {
+			return res.status(500).json({ msg: "Consent contract address not configured (CONSENT_CONTRACT_ADDRESS)" });
+		}
+		const consentContract = new ethers.Contract(consentAddress, ConsentContractArtifact.abi, provider);
+		const hasConsent = await consentContract.hasConsent(patient.walletAddress, req.doctor.walletAddress);
+		if (!hasConsent) return res.status(403).json({ msg: "Doctor not authorized to view this patient's records (consent missing)" });
+
+		const recordContractAddress = process.env.RECORD_CONTRACT_ADDRESS || "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0";
+		if (!recordContractAddress) return res.status(500).json({ msg: "Record contract address not configured" });
+		const recordContract = new ethers.Contract(recordContractAddress, RecordContractArtifact.abi, provider);
+
+		const records = await recordContract.getRecords(patient.walletAddress);
+		const normalized = records.map((r) => ({ ipfsHash: r.ipfsHash, timestamp: Number(r.timestamp), uploadedBy: r.uploadedBy }));
+
+		if (index !== undefined) {
+			if (index < 0 || index >= normalized.length) return res.status(404).json({ msg: "Record index out of range" });
+			return res.json({ record: normalized[index] });
+		}
+
+		const dbRecords = await Record.find({ patient: patient._id }).sort({ createdAt: -1 });
+		return res.json({ records: normalized, dbRecords });
+	} catch (err) {
+		console.error("Doctor alias view error:", err);
+		return res.status(500).json({ msg: "Failed to fetch records", error: err.message });
+	}
+});
+
 // GET /api/record/doctor/:patientId?index=n
 // Doctor can view a patient's records (only if assigned doctor)
 router.get("/doctor/:patientId", requireDoctorAuth, async (req, res) => {
@@ -160,19 +203,29 @@ router.get("/doctor/:patientId", requireDoctorAuth, async (req, res) => {
 		const index = req.query.index !== undefined ? Number(req.query.index) : undefined;
 
 		const patient = await resolvePatientByIdOrWallet(patientId);
+        console.log(patient)
 		if (!patient) return res.status(404).json({ msg: "Patient not found" });
 
 		// Authorization: assigned doctor only
-		if (String(patient.doctor) !== String(req.doctor._id)) {
-			return res.status(403).json({ msg: "Doctor not authorized to view this patient's records" });
+		const rpc = process.env.RPC_URL || "http://127.0.0.1:8545";
+		const provider = new ethers.providers.JsonRpcProvider(rpc);
+
+		// Authorization: require on-chain consent. Assigned doctor field alone does not grant access.
+		{
+			const consentAddress = process.env.CONSENT_CONTRACT_ADDRESS || "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+			if (!consentAddress) {
+				return res.status(500).json({ msg: "Consent contract address not configured (CONSENT_CONTRACT_ADDRESS)" });
+			}
+			const consentContract = new ethers.Contract(consentAddress, ConsentContractArtifact.abi, provider);
+			const hasConsent = await consentContract.hasConsent(patient.walletAddress, req.doctor.walletAddress);
+			if (!hasConsent) return res.status(403).json({ msg: "Doctor not authorized to view this patient's records (consent missing)" });
 		}
 
-		const rpc = process.env.RPC_URL || "http://127.0.0.1:8545";
 		const recordContractAddress = process.env.RECORD_CONTRACT_ADDRESS || "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0";
         
 		if (!recordContractAddress) return res.status(500).json({ msg: "Record contract address not configured" });
 
-		const provider = new ethers.providers.JsonRpcProvider(rpc);
+		
 		const recordContract = new ethers.Contract(recordContractAddress, RecordContractArtifact.abi, provider);
 
 		const records = await recordContract.getRecords(patient.walletAddress);
@@ -197,6 +250,10 @@ router.get("/doctor/:patientId", requireDoctorAuth, async (req, res) => {
 });
 
 
+
+
+
+
 // GET /api/record/doctor/:patientId/record/:index
 // Access a specific record by 1-based index (more user-friendly)
 router.get("/doctor/:patientId/record/:index", requireDoctorAuth, async (req, res) => {
@@ -208,14 +265,22 @@ router.get("/doctor/:patientId/record/:index", requireDoctorAuth, async (req, re
 		const patient = await resolvePatientByIdOrWallet(patientId);
 		if (!patient) return res.status(404).json({ msg: "Patient not found" });
 
-		// Authorization: assigned doctor only
-		if (String(patient.doctor) !== String(req.doctor._id)) {
-			return res.status(403).json({ msg: "Doctor not authorized to view this patient's records" });
+		const rpc = process.env.RPC_URL || "http://127.0.0.1:8545";
+		const provider = new ethers.providers.JsonRpcProvider(rpc);
+
+		// Authorization: require on-chain consent. Assigned doctor field alone does not grant access.
+		{
+			const consentAddress = process.env.CONSENT_CONTRACT_ADDRESS || "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+			if (!consentAddress) {
+				return res.status(500).json({ msg: "Consent contract address not configured (CONSENT_CONTRACT_ADDRESS)" });
+			}
+			const consentContract = new ethers.Contract(consentAddress, ConsentContractArtifact.abi, provider);
+			const hasConsent = await consentContract.hasConsent(patient.walletAddress, req.doctor.walletAddress);
+			console.log(hasConsent)
+			if (!hasConsent) return res.status(403).json({ msg: "Doctor not authorized to view this patient's records (consent missing)" });
 		}
 
-		const rpc = process.env.RPC_URL || "http://127.0.0.1:8545";
 		const recordContractAddress = process.env.RECORD_CONTRACT_ADDRESS || "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0";
-		const provider = new ethers.providers.JsonRpcProvider(rpc);
 		const recordContract = new ethers.Contract(recordContractAddress, RecordContractArtifact.abi, provider);
 
 		const records = await recordContract.getRecords(patient.walletAddress);
@@ -273,20 +338,12 @@ router.get("/patient", async (req, res) => {
 			const patient = await resolvePatientByIdOrWallet(patientIdParam);
 			if (!patient) return res.status(404).json({ msg: "Patient not found" });
 
-			// Authorization: assigned doctor OR on-chain consent
-			let authorized = false;
-			if (String(patient.doctor) === String(doctor._id)) authorized = true;
-
-			// If not assigned doctor, check on-chain consent (requires CONSENT_CONTRACT_ADDRESS env var)
-			if (!authorized) {
-				const consentAddress = process.env.CONSENT_CONTRACT_ADDRESS;
-				if (!consentAddress) return res.status(500).json({ msg: "Consent contract address not configured (CONSENT_CONTRACT_ADDRESS)" });
-				const consentContract = new ethers.Contract(consentAddress, ConsentContractArtifact.abi, provider);
-				const hasConsent = await consentContract.hasConsent(patient.walletAddress, doctor.walletAddress);
-				if (hasConsent) authorized = true;
-			}
-
-			if (!authorized) return res.status(403).json({ msg: "Doctor not authorized to view this patient's records" });
+			// Authorization: require on-chain consent only (assigned-doctor DB field is not sufficient)
+			const consentAddress = process.env.CONSENT_CONTRACT_ADDRESS;
+			if (!consentAddress) return res.status(500).json({ msg: "Consent contract address not configured (CONSENT_CONTRACT_ADDRESS)" });
+			const consentContract = new ethers.Contract(consentAddress, ConsentContractArtifact.abi, provider);
+			const hasConsent = await consentContract.hasConsent(patient.walletAddress, doctor.walletAddress);
+			if (!hasConsent) return res.status(403).json({ msg: "Doctor not authorized to view this patient's records (consent missing or revoked)" });
 
 			const records = await recordContract.getRecords(patient.walletAddress);
 			const normalized = records.map((r) => ({ ipfsHash: r.ipfsHash, timestamp: Number(r.timestamp), uploadedBy: r.uploadedBy }));

@@ -76,5 +76,51 @@ console.log("giveConsent:", iface.getFunction("giveConsent").selector);
   }
 });
 
+// Example POST /api/access/revoke
+router.post("/revoke", requirePatientAuth, async (req, res) => {
+  try {
+    const { privateKey, walletAddress } = req.body;
+
+    if (!privateKey || !walletAddress) {
+      return res.status(400).json({ error: "Private key and doctor address required" });
+    }
+    if (!walletAddress || !ethers.utils.isAddress(walletAddress)) {
+      return res.status(400).json({ error: "Invalid doctor address" });
+    }
+
+    const patientWallet = new ethers.Wallet(privateKey, provider);
+
+    // Ensure the patient is the logged-in user
+    if (patientWallet.address.toLowerCase() !== req.patient.walletAddress.toLowerCase()) {
+      return res.status(403).json({ error: "Private key does not match logged-in patient" });
+    }
+
+    // Check patient is registered on blockchain
+    const role = await identityContract.getRole(patientWallet.address);
+    if (Number(role) !== 3) {
+      return res.status(403).json({ error: "Wallet is NOT registered as Patient on blockchain" });
+    }
+
+    // Check doctor is valid doctor
+    const doctorRole = await identityContract.getRole(walletAddress);
+    if (Number(doctorRole) !== 2) {
+      return res.status(400).json({ error: "Provided address is NOT a registered Doctor" });
+    }
+
+    const consentWithSigner = consentContract.connect(patientWallet);
+    const tx = await consentWithSigner.revokeConsent(walletAddress);
+    await tx.wait();
+
+    res.json({
+      success: true,
+      message: "Consent revoked successfully",
+      txHash: tx.hash,
+    });
+  } catch (err) {
+    console.error("Revoke consent error:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 module.exports = router;
