@@ -5,7 +5,6 @@ import { useDarkMode } from '../context/DarkModeContext';
 import NotificationBell from '../PatientPortal/NotificationBell';
 import Sidebar from '../components/Sidebar';
 import { Bar, Doughnut } from 'react-chartjs-2';
-import { Bar, Doughnut } from 'react-chartjs-2';
 import blueLogo from '../assets/Bluelogo.png';
 import {
   Chart as ChartJS,
@@ -139,15 +138,15 @@ export default function DoctorDashboard() {
   };
 
   return (
-    <div className={`min-h-screen flex ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+    <div className={`w-screen h-screen flex ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
       {/* SIDEBAR */}
       <Sidebar />
 
       {/* MAIN CONTENT */}
-      <main className={`flex-1 flex flex-col ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <main className={`flex-1 flex flex-col w-full md:ml-64 pt-16 md:pt-0 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
         {/* TOP BAR */}
-        <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-8 py-4 flex items-center justify-between`}>
-          <h1 className={`text-2xl font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Dashboard</h1>
+        <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-4 md:px-8 py-4 flex items-center justify-between`}>
+          <h1 className={`text-xl md:text-2xl font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Dashboard</h1>
           <div className="flex items-center gap-4">
             <NotificationBell />
             <button 
@@ -172,9 +171,9 @@ export default function DoctorDashboard() {
         </div>
 
         {/* CONTENT */}
-        <div className="flex-1 overflow-y-auto p-8">
+        <div className="flex-1 overflow-y-auto p-4 md:p-8">
           {/* STAT CARDS */}
-          <div className="grid grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
             {stats.map((stat, i) => (
               <div
                 key={i}
@@ -190,9 +189,9 @@ export default function DoctorDashboard() {
           </div>
 
           {/* CHARTS SECTION */}
-          <div className="grid grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
             {/* REPORTS UPLOAD CHART */}
-            <div className={`col-span-2 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border rounded-xl p-6 shadow-sm transition-all`}>
+            <div className={`lg:col-span-2 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border rounded-xl p-4 md:p-6 shadow-sm transition-all`}>
               <div className="flex justify-between items-center mb-6">
                 <h3 className={`font-semibold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Reports Upload</h3>
               </div>
@@ -203,7 +202,7 @@ export default function DoctorDashboard() {
             </div>
 
             {/* REPORTS STATISTICS DONUT */}
-            <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border rounded-xl p-6 shadow-sm transition-all`}>
+            <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border rounded-xl p-4 md:p-6 shadow-sm transition-all`}>
               <h3 className={`font-semibold mb-4 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Reports Statistics</h3>
               
               <div className="flex items-center justify-center h-48">
@@ -227,8 +226,8 @@ export default function DoctorDashboard() {
           </div>
 
           {/* PATIENT LIST */}
-          <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border rounded-xl p-6 shadow-sm transition-all`}>
-            <div className="flex items-center justify-between mb-6">
+          <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border rounded-xl p-4 md:p-6 shadow-sm transition-all`}>
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 mb-6">
               <h3 className={`text-lg font-semibold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Patient List</h3>
               <div className={`flex gap-4 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                 <button className={`underline transition-colors ${darkMode ? 'hover:text-gray-300' : 'hover:text-gray-900'}`}>Weekly</button>
@@ -237,8 +236,8 @@ export default function DoctorDashboard() {
               </div>
             </div>
 
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
+            <div className="overflow-x-auto -mx-4 md:mx-0">
+              <table className="w-full text-xs md:text-sm">
                 <thead>
                   <tr className={`border-b ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
                     <th className={`text-left py-3 px-4 font-medium ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>Name</th>

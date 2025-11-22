@@ -70,9 +70,9 @@ export default function PatientSettings() {
       <PatientSidebar />
 
       {/* MAIN CONTENT */}
-      <main className={`flex-1 flex ml-64 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <main className={`flex-1 flex flex-col lg:flex-row ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
         {/* SETTINGS MENU */}
-        <div className={`w-80 border-r ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'} flex flex-col`}>
+        <div className={`hidden lg:flex lg:w-80 border-r ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'} flex-col`}>
           <div className={`border-b ${darkMode ? 'border-gray-700' : 'border-gray-200'} px-6 py-6`}>
             <h1 className={`text-2xl font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Settings</h1>
           </div>
@@ -115,10 +115,10 @@ export default function PatientSettings() {
         </div>
 
         {/* SETTINGS CONTENT */}
-        <div className={`flex-1 flex flex-col ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+        <div className={`flex-1 flex flex-col w-full ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
           {/* TOP BAR */}
-          <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-8 py-4 flex items-center justify-between`}>
-            <h1 className={`text-2xl font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Settings</h1>
+          <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-4 md:px-8 py-4 flex items-center justify-between`}>
+          <h1 className={`text-xl md:text-2xl font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Settings</h1>
             <div className="flex items-center gap-4">
               <NotificationBell />
               <button 
@@ -143,7 +143,24 @@ export default function PatientSettings() {
           </div>
 
           {/* SETTINGS CONTENT */}
-          <div className="flex-1 overflow-y-auto p-8">
+          <div className="flex-1 overflow-y-auto p-4 md:p-8">
+            {/* Mobile Settings Menu */}
+            <div className="lg:hidden mb-6 flex flex-wrap gap-2">
+              {settingsSections.map((section) => (
+                <button
+                  key={section.id}
+                  onClick={() => setExpandedSection(section.id)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                    expandedSection === section.id
+                      ? 'bg-blue-600 text-white'
+                      : darkMode ? 'bg-gray-800 text-gray-300 border border-gray-700' : 'bg-white text-gray-700 border border-gray-200'
+                  }`}
+                >
+                  {section.label}
+                </button>
+              ))}
+            </div>
+
             <div className="max-w-4xl">
               {expandedSection === 'notification' && (
                 <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border rounded-2xl shadow-lg p-8`}>

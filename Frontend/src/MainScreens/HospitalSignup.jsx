@@ -82,21 +82,21 @@ export default function HospitalSignup() {
       backgroundPosition: 'center'
     }}>
       {/* Header Navigation - matching main screens */}
-      <div className="px-8 py-6 flex justify-between items-center">
-        <div className="w-20"></div>
-        <div className="flex gap-12">
-          <button onClick={() => handleNavigation('/welcome')} className="text-white font-bold text-base hover:text-red-200 transition-colors duration-300 transform hover:scale-105 active:scale-95">WELCOME</button>
-          <button onClick={() => handleNavigation('/patient-login')} className="text-white font-bold text-base hover:text-red-200 transition-colors duration-300 transform hover:scale-105 active:scale-95">PATIENT</button>
-          <button onClick={() => handleNavigation('/doctor-login')} className="text-white font-bold text-base hover:text-red-200 transition-colors duration-300 transform hover:scale-105 active:scale-95">DOCTOR</button>
-          <button onClick={() => handleNavigation('/hospital-login')} className="text-white font-bold text-base hover:text-red-200 transition-colors duration-300 transform hover:scale-105 active:scale-95">HOSPITAL</button>
+      <div className="px-4 md:px-8 py-4 md:py-6 flex justify-between items-center">
+        <div className="w-12 md:w-20"></div>
+        <div className="flex gap-4 md:gap-12 flex-wrap justify-center">
+          <button onClick={() => handleNavigation('/welcome')} className="text-white font-bold text-xs md:text-base hover:text-red-200 transition-colors duration-300 transform hover:scale-105 active:scale-95">WELCOME</button>
+          <button onClick={() => handleNavigation('/patient-login')} className="text-white font-bold text-xs md:text-base hover:text-red-200 transition-colors duration-300 transform hover:scale-105 active:scale-95">PATIENT</button>
+          <button onClick={() => handleNavigation('/doctor-login')} className="text-white font-bold text-xs md:text-base hover:text-red-200 transition-colors duration-300 transform hover:scale-105 active:scale-95">DOCTOR</button>
+          <button onClick={() => handleNavigation('/hospital-login')} className="text-white font-bold text-xs md:text-base hover:text-red-200 transition-colors duration-300 transform hover:scale-105 active:scale-95">HOSPITAL</button>
         </div>
-        <div className="w-20"></div>
+        <div className="w-12 md:w-20"></div>
       </div>
 
       {/* Content */}
-      <div className="flex-1 w-full px-6 py-4">
-        <div className="text-center mb-6">
-          <img src={logo} alt="One Trust Healthchain Logo" className="h-16 w-auto object-contain mx-auto mb-4" />
+      <div className="flex-1 w-full px-4 md:px-6 py-4">
+        <div className="text-center mb-4 md:mb-6">
+          <img src={logo} alt="One Trust Healthchain Logo" className="h-12 md:h-16 w-auto object-contain mx-auto mb-2 md:mb-4" />
         </div>
 
         {error && (
