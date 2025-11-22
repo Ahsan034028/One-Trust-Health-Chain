@@ -12,6 +12,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useDarkMode } from '../context/DarkModeContext';
+import blueLogo from '../assets/Bluelogo.png';
 
 const menuItems = [
   { id: 'dashboard', label: 'Dashboard', icon: Bars3Icon, path: '/doctor' },
@@ -35,20 +36,14 @@ export default function Sidebar() {
   };
 
   return (
-    <div className={`w-64 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r h-screen flex flex-col fixed top-0 left-0 transition-colors`}>
+    <div className={`w-64 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r h-screen flex flex-col fixed top-0 left-0 transition-colors overflow-hidden`}>
       {/* Logo */}
-      <div className={`p-6 border-b ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-        <h1 className={`text-2xl font-bold ${darkMode ? 'text-blue-400' : 'text-blue-900'} flex items-center gap-3`}>
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16 2L2 12H6V22H12V16H20V22H26V12H30L16 2Z" fill={darkMode ? '#60A5FA' : '#1E40AF'}/>
-            <path d="M10 22H22V30H10V22Z" fill={darkMode ? '#93C5FD' : '#3B82F6'}/>
-          </svg>
-          One Trust Healthchain
-        </h1>
+      <div className={`p-6 border-b ${darkMode ? 'border-gray-700' : 'border-gray-200'} flex-shrink-0`}>
+        <img src={blueLogo} alt="Logo" className="w-40" />
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-4 py-6 space-y-1">
+      <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto scrollbar-hide">
         {menuItems.map((item) => {
           const Icon = item.icon;
           const isActive = currentPath === item.path;
@@ -72,7 +67,7 @@ export default function Sidebar() {
       </nav>
 
       {/* Logout */}
-      <div className={`p-4 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+      <div className={`p-4 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'} flex-shrink-0`}>
         <button 
           onClick={handleLogout}
           className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${

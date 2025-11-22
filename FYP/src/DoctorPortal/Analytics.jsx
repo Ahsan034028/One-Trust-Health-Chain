@@ -32,6 +32,19 @@ export default function Analytics() {
   const navigate = useNavigate();
   const { darkMode, toggleDarkMode } = useDarkMode();
 
+  const getStatusColor = (status) => {
+    switch(status) {
+      case 'Confirmed':
+        return 'text-green-600';
+      case 'Pending':
+        return 'text-yellow-600';
+      case 'Declined':
+        return 'text-red-600';
+      default:
+        return 'text-gray-600';
+    }
+  };
+
   const admissionData = [
     { date: 'Sep 9, 2023', admissions: 123, discharges: '000023', status: 'Confirmed', avgStay: '3.5 days', change: '+10' },
     { date: 'Sep 10, 2033', admissions: 80, discharges: '000023', status: 'Pending', avgStay: '4.2 days', change: '+13' },
@@ -146,20 +159,7 @@ export default function Analytics() {
   };
 
   return (
-    switch (status) {
-      case 'Confirmed':
-        return 'text-green-600';
-      case 'Pending':
-        return 'text-yellow-600';
-      case 'Declined':
-        return 'text-red-600';
-      default:
-        return 'text-gray-600';
-    }
-  };
-
-  return (
-    <div className={`min-h-screen flex ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+    <div className={`w-screen h-screen flex ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
       {/* SIDEBAR */}
       <Sidebar />
 

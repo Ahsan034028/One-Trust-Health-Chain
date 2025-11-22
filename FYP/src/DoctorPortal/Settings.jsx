@@ -509,7 +509,7 @@ export default function Settings() {
   };
 
   return (
-    <div className={`min-h-screen flex ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+    <div className={`w-screen h-screen flex ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
       <Sidebar />
 
       {/* MAIN CONTENT */}

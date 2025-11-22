@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { XMarkIcon, ChevronDownIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon, ChevronDownIcon, MoonIcon, SunIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
 import { useDarkMode } from '../context/DarkModeContext';
 import NotificationBell from '../PatientPortal/NotificationBell';
@@ -130,7 +130,7 @@ export default function UploadReports() {
   };
 
   return (
-    <div className={`min-h-screen flex ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+    <div className={`w-screen h-screen flex ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
       {/* SUCCESS MODAL */}
       {showSuccessModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">

@@ -56,11 +56,11 @@ export default function HelpSupport() {
   ];
 
   return (
-    <div className={`flex h-screen ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+    <div className={`w-screen h-screen flex ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
       <Sidebar />
 
       {/* MAIN CONTENT */}
-      <div className="flex-1 flex flex-col ml-64">
+      <div className={`flex-1 flex flex-col ml-64 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
         {/* TOP BAR */}
         <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-8 py-4 flex items-center justify-between`}>
           <h1 className={`text-2xl font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Help & Support</h1>
@@ -88,8 +88,8 @@ export default function HelpSupport() {
         </div>
 
         {/* CONTENT AREA */}
-        <div className="flex-1 overflow-auto">
-          <div className={`${darkMode ? 'bg-gray-900' : 'bg-gray-50'} p-8`}>
+        <div className={`flex-1 overflow-auto ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+          <div className={`p-8 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
             {/* Contact Methods */}
             <div className="mb-12">
               <h2 className={`text-xl font-bold mb-6 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Contact Us</h2>
