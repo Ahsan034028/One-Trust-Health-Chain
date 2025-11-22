@@ -31,11 +31,11 @@ export default function HealthRecords() {
   );
 
   return (
-    <div className={`w-screen h-screen flex ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+    <div className={`min-h-screen flex ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
       <Sidebar />
 
       {/* MAIN CONTENT */}
-      <main className={`flex-1 md:ml-64 flex flex-col ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <main className={`flex-1 flex flex-col ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
         {/* TOP BAR */}
         <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-4 md:px-8 py-4 flex items-center justify-between`}>
           <h1 className={`text-xl md:text-2xl font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Health records</h1>
@@ -63,11 +63,11 @@ export default function HealthRecords() {
         </div>
 
         {/* CONTENT */}
-        <div className="flex-1 overflow-y-auto p-8">
+        <div className="flex-1 overflow-y-auto p-4 md:p-8">
           {/* Filter and Search Bar */}
-          <div className="mb-6 flex items-center justify-between flex-wrap gap-4">
+          <div className="mb-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             {/* Filter Buttons */}
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-2 md:gap-3 w-full md:w-auto">
               {filters.map((filter) => (
                 <button
                   key={filter}
@@ -86,7 +86,7 @@ export default function HealthRecords() {
             </div>
 
             {/* Search and Add Button */}
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
               <div className="relative">
                 <MagnifyingGlassIcon className={`w-5 h-5 absolute left-3 top-3 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`} />
                 <input

@@ -63,16 +63,16 @@ export default function Sidebar() {
       )}
 
       {/* Sidebar */}
-      <div className={`w-64 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r h-screen flex flex-col fixed top-0 left-0 transition-all duration-300 transform overflow-hidden z-40 ${
+      <div className={`w-64 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r flex flex-col transition-all duration-300 transform overflow-hidden z-40 ${
         isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
-      } md:relative md:translate-x-0`}>
+      } md:relative md:translate-x-0 md:h-auto md:min-h-screen fixed md:static top-0 left-0 h-screen md:h-auto`}>
         {/* Logo */}
         <div className={`p-6 border-b ${darkMode ? 'border-gray-700' : 'border-gray-200'} flex-shrink-0`}>
           <img src={blueLogo} alt="Logo" className="w-40" />
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto scrollbar-hide">
+        <nav className="flex-1 px-4 py-6 space-y-1 overflow-hidden">
           {menuItems.map((item) => {
             const Icon = item.icon;
             const isActive = currentPath === item.path;
