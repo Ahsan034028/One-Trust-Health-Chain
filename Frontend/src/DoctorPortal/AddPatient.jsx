@@ -120,14 +120,24 @@ export default function AddPatient() {
   };
 
   return (
+<<<<<<< HEAD
     <div className={`w-screen h-screen flex ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+=======
+    <div className={`flex min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+>>>>>>> 4cb16abe25d827d6ac352ee8fe29b5c2d6076638
       {/* SIDEBAR */}
       <Sidebar />
 
       {/* MAIN CONTENT */}
+<<<<<<< HEAD
       <main className={`flex-1 flex flex-col w-full md:ml-64 pt-16 md:pt-0 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
         {/* TOP BAR */}
         <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-4 md:px-8 py-4 flex items-center justify-between`}>
+=======
+      <div className={`flex-1 flex flex-col ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+        {/* TOP BAR */}
+        <div className={`flex-shrink-0 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-4 md:px-8 py-4 flex items-center justify-between`}>
+>>>>>>> 4cb16abe25d827d6ac352ee8fe29b5c2d6076638
           <h1 className={`text-xl md:text-2xl font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Add Patient</h1>
           <div className="flex items-center gap-4">
             <NotificationBell />
@@ -153,7 +163,11 @@ export default function AddPatient() {
         </div>
 
         {/* CONTENT */}
+<<<<<<< HEAD
         <div className="flex-1 overflow-y-auto p-4 md:p-8">
+=======
+        <main className="flex-1 overflow-y-auto p-4 md:p-8">
+>>>>>>> 4cb16abe25d827d6ac352ee8fe29b5c2d6076638
           <div className="max-w-4xl">
             {/* Error Message */}
             {error && (
@@ -174,7 +188,11 @@ export default function AddPatient() {
               <form onSubmit={handleSubmit}>
                 {/* Personal Information */}
                 <h3 className={`text-lg font-semibold mb-6 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Personal Information</h3>
+<<<<<<< HEAD
                 <div className="grid grid-cols-2 gap-6 mb-8">
+=======
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+>>>>>>> 4cb16abe25d827d6ac352ee8fe29b5c2d6076638
                   {/* First Name */}
                   <div>
                     <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>First Name *</label>
@@ -496,8 +514,13 @@ export default function AddPatient() {
               </form>
             </div>
           </div>
+<<<<<<< HEAD
         </div>
       </main>
+=======
+        </main>
+      </div>
+>>>>>>> 4cb16abe25d827d6ac352ee8fe29b5c2d6076638
     </div>
   );
 }

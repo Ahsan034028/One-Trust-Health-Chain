@@ -135,6 +135,7 @@ export default function HospitalDashboard() {
   };
 
   return (
+<<<<<<< HEAD
     <div className={`min-h-screen flex ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
       {/* SIDEBAR */}
       <HospitalSidebar />
@@ -143,6 +144,16 @@ export default function HospitalDashboard() {
       <main className={`flex-1 flex flex-col w-full ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
         {/* TOP BAR */}
         <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-4 md:px-8 py-4 flex items-center justify-between`}>
+=======
+    <div className={`flex min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      {/* SIDEBAR */}
+      <HospitalSidebar />
+
+      {/* MAIN CONTENT WRAPPER */}
+      <div className={`flex-1 flex flex-col ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+        {/* TOP BAR */}
+        <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-4 md:px-8 py-4 flex items-center justify-between flex-shrink-0`}>
+>>>>>>> 4cb16abe25d827d6ac352ee8fe29b5c2d6076638
           <h1 className={`text-xl md:text-2xl font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Dashboard</h1>
           <div className="flex items-center gap-4">
             <NotificationBell />
@@ -168,7 +179,11 @@ export default function HospitalDashboard() {
         </div>
 
         {/* CONTENT */}
+<<<<<<< HEAD
         <div className="flex-1 overflow-y-auto p-4 md:p-8">
+=======
+        <main className="flex-1 overflow-y-auto p-4 md:p-8">
+>>>>>>> 4cb16abe25d827d6ac352ee8fe29b5c2d6076638
           {/* STAT CARDS */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {stats.map((stat, i) => (
@@ -262,8 +277,13 @@ export default function HospitalDashboard() {
               </table>
             </div>
           </div>
+<<<<<<< HEAD
         </div>
       </main>
+=======
+        </main>
+      </div>
+>>>>>>> 4cb16abe25d827d6ac352ee8fe29b5c2d6076638
     </div>
   );
 }

@@ -61,9 +61,15 @@ export default function HospitalSidebar() {
       )}
 
       {/* Sidebar */}
+<<<<<<< HEAD
       <div className={`w-64 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r h-screen flex flex-col fixed top-0 left-0 transition-all duration-300 transform overflow-hidden z-40 ${
         isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
       } md:relative md:translate-x-0`}>
+=======
+      <div className={`w-64 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-r flex flex-col transition-all duration-300 transform overflow-hidden z-40 ${
+        isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+      } md:relative md:translate-x-0 md:h-auto md:min-h-screen fixed md:static top-0 left-0 h-screen md:h-auto`}>
+>>>>>>> 4cb16abe25d827d6ac352ee8fe29b5c2d6076638
       {/* Logo */}
       <div className={`p-6 border-b ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
         <img src={blueLogo} alt="Logo" className="w-40" />

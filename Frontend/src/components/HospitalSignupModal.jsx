@@ -132,7 +132,11 @@ export default function HospitalSignupModal({ isOpen, onClose }) {
             </div>
           )}
 
+<<<<<<< HEAD
           <div className="grid grid-cols-2 gap-4">
+=======
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+>>>>>>> 4cb16abe25d827d6ac352ee8fe29b5c2d6076638
             {/* Required Fields */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1">

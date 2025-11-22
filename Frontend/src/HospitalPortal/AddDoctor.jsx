@@ -121,7 +121,11 @@ export default function AddDoctor() {
       <HospitalSidebar />
 
       {/* MAIN CONTENT */}
+<<<<<<< HEAD
       <main className={`flex-1 flex flex-col w-full md:ml-64 pt-16 md:pt-0 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+=======
+      <main className={`flex-1 flex flex-col w-full ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+>>>>>>> 4cb16abe25d827d6ac352ee8fe29b5c2d6076638
         {/* TOP BAR */}
         <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-4 md:px-8 py-4 flex items-center justify-between`}>
           <h1 className={`text-xl md:text-2xl font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Add Doctor</h1>
@@ -170,7 +174,11 @@ export default function AddDoctor() {
               <form onSubmit={handleSubmit}>
                 {/* Personal Information */}
                 <h3 className={`text-lg font-semibold mb-6 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Personal Information</h3>
+<<<<<<< HEAD
                 <div className="grid grid-cols-2 gap-6 mb-8">
+=======
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+>>>>>>> 4cb16abe25d827d6ac352ee8fe29b5c2d6076638
                   {/* First Name */}
                   <div>
                     <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>First Name *</label>
@@ -242,7 +250,11 @@ export default function AddDoctor() {
 
                 {/* Professional Information */}
                 <h3 className={`text-lg font-semibold mb-6 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Professional Information</h3>
+<<<<<<< HEAD
                 <div className="grid grid-cols-2 gap-6 mb-8">
+=======
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+>>>>>>> 4cb16abe25d827d6ac352ee8fe29b5c2d6076638
                   {/* Specialization */}
                   <div>
                     <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Specialization *</label>
@@ -363,7 +375,11 @@ export default function AddDoctor() {
 
                 {/* Blockchain Information */}
                 <h3 className={`text-lg font-semibold mb-6 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Blockchain Information</h3>
+<<<<<<< HEAD
                 <div className="grid grid-cols-2 gap-6 mb-8">
+=======
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+>>>>>>> 4cb16abe25d827d6ac352ee8fe29b5c2d6076638
                   {/* Wallet Address */}
                   <div>
                     <label className={`block text-sm font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Wallet Address *</label>
