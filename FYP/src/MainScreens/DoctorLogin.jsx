@@ -56,30 +56,30 @@ export default function DoctorLogin() {
       backgroundPosition: 'center'
     }}>
       {/* Header Navigation */}
-      <div className="px-8 py-4 flex justify-between items-center">
+      <div className="px-4 md:px-8 py-4 flex justify-between items-center">
         <div></div>
-        <div className="flex gap-8">
+        <div className="flex gap-4 md:gap-8 flex-wrap justify-center">
           <button 
             onClick={() => handleNavigation('/welcome')}
-            className="text-white font-bold text-sm hover:text-green-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
+            className="text-white font-bold text-xs md:text-sm hover:text-green-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
           >
             WELCOME
           </button>
           <button 
             onClick={() => handleNavigation('/patient-login')}
-            className="text-white font-bold text-sm hover:text-green-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
+            className="text-white font-bold text-xs md:text-sm hover:text-green-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
           >
             PATIENT
           </button>
           <button 
             onClick={() => handleNavigation('/doctor-login')}
-            className="text-white font-bold text-sm hover:text-green-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
+            className="text-white font-bold text-xs md:text-sm hover:text-green-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
           >
             DOCTOR
           </button>
           <button 
             onClick={() => handleNavigation('/hospital-login')}
-            className="text-white font-bold text-sm hover:text-green-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
+            className="text-white font-bold text-xs md:text-sm hover:text-green-200 transition-colors duration-300 transform hover:scale-105 active:scale-95"
           >
             HOSPITAL
           </button>
@@ -88,11 +88,11 @@ export default function DoctorLogin() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center">
+      <div className="flex-1 flex items-center justify-center px-4 py-8">
         <div className="w-full max-w-sm">
           {/* Logo */}
-          <div className="text-center mb-8">
-            <img src={logo} alt="One Trust Healthchain Logo" className="h-20 w-auto object-contain mx-auto" />
+          <div className="text-center mb-6 md:mb-8">
+            <img src={logo} alt="One Trust Healthchain Logo" className="h-16 md:h-20 w-auto object-contain mx-auto" />
           </div>
 
           {/* Error Message */}

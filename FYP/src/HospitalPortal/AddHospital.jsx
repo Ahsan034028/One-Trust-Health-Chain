@@ -64,10 +64,10 @@ export default function AddHospital() {
       <HospitalSidebar />
 
       {/* MAIN CONTENT */}
-      <main className={`flex-1 flex flex-col ml-64 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <main className={`flex-1 flex flex-col w-full md:ml-64 pt-16 md:pt-0 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
         {/* TOP BAR */}
-        <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-8 py-4 flex items-center justify-between`}>
-          <h1 className={`text-2xl font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Add Hospital</h1>
+        <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-4 md:px-8 py-4 flex items-center justify-between`}>
+          <h1 className={`text-xl md:text-2xl font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Add Hospital</h1>
           <div className="flex items-center gap-4">
             <NotificationBell />
             <button 
@@ -92,7 +92,7 @@ export default function AddHospital() {
         </div>
 
         {/* CONTENT */}
-        <div className="flex-1 overflow-y-auto p-8">
+        <div className="flex-1 overflow-y-auto p-4 md:p-8">
           <div className="max-w-4xl">
             <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border rounded-2xl shadow-lg p-8`}>
               <h2 className={`text-lg font-semibold mb-8 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Hospital Information</h2>

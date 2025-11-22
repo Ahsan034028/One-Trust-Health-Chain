@@ -107,9 +107,9 @@ export default function AllNotifications() {
     <div className={`flex min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
       <PatientSidebar />
       
-      <main className={`flex-1 ml-64 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <main className={`flex-1 md:ml-64 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
         {/* Header */}
-        <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-8 py-6 flex items-center gap-4`}>
+        <div className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b px-4 md:px-8 py-6 flex items-center gap-4`}>
           <button
             onClick={() => navigate('/patient')}
             className={`p-2 rounded-lg transition ${
@@ -119,7 +119,7 @@ export default function AllNotifications() {
             <ArrowLeftIcon className="w-5 h-5" />
           </button>
           <div className="flex-1">
-            <h1 className={`text-2xl font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>
+            <h1 className={`text-xl md:text-2xl font-bold ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>
               All Notifications
             </h1>
             <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -137,7 +137,7 @@ export default function AllNotifications() {
         </div>
 
         {/* Notifications */}
-        <div className="p-8">
+        <div className="p-4 md:p-8">
           {notifications.length === 0 ? (
             <div className={`text-center py-12 rounded-lg border-2 border-dashed ${
               darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-300 bg-gray-100'
